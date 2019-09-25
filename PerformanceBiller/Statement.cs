@@ -24,7 +24,7 @@ namespace PerformanceBiller
                         thisAmount = 40000;
                         if (Convert.ToInt32(perf.GetValue("audience")) > 30) {
                             thisAmount += 1000 * (Convert.ToInt32(perf.GetValue("audience")) - 30);
-                        }
+                        }   
                         break;
                     case "comedy":
                         thisAmount = 30000;
