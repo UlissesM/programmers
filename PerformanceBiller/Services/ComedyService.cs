@@ -1,5 +1,4 @@
-﻿using System;
-namespace PerformanceBiller.Services
+﻿namespace PerformanceBiller.Services
 {
     public class ComedyService : BasePlayService
     {
@@ -12,6 +11,10 @@ namespace PerformanceBiller.Services
 
         public override int getPlayAmount() =>
             PLAY_AMOUNT;
+
+        public override int calculateVolumeCredits(int audience) =>
+            base.calculateVolumeCredits(audience) + (audience / 5);
+        
 
         private int addExtraAmountAudience(int audience) =>
             300 * audience;
