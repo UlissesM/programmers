@@ -2,21 +2,23 @@
 {
     public class ComedyService : BasePlayService
     {
-        private const int PLAY_AMOUNT = 30000;
+        private const int BONUS = 1500;
+        private const int EXTRA_AMOUNT = 300;
 
-        public override int calculateExtraAmountAudience(int audience) =>
-            audience > 20
-            ? (PLAY_AMOUNT + 1000 + 500 * (audience - 20)) + addExtraAmountAudience(audience)
+        protected override int calculateExtraAmountAudience(int audience) =>
+            audience > getMinimumAudience()
+            ? (getPlayAmount() + BONUS * (audience - getMinimumAudience())) + addExtraAmountAudience(audience)
             : addExtraAmountAudience(audience);
 
-        public override int getPlayAmount() =>
-            PLAY_AMOUNT;
+        protected override int getPlayAmount() => 30000;
 
         public override int calculateVolumeCredits(int audience) =>
             base.calculateVolumeCredits(audience) + (audience / 5);
-        
 
-        private int addExtraAmountAudience(int audience) =>
-            300 * audience;
+
+        public int addExtraAmountAudience(int audience) =>
+            EXTRA_AMOUNT * audience;
+
+        protected override int getMinimumAudience() => 20;
     }
 }

@@ -2,12 +2,13 @@
 {
     public class TragedyService : BasePlayService
     {
-        private const int PLAY_AMOUNT = 40000;
+        private const int BONUS = 1000;
 
-        public override int calculateExtraAmountAudience(int audience) =>
-            audience > 30 ? 1000 * (audience - 30) : 0;
+        protected override int calculateExtraAmountAudience(int audience) =>
+            audience > getMinimumAudience() ? BONUS * (audience - getMinimumAudience()) : 0;
 
-        public override int getPlayAmount() =>
-            PLAY_AMOUNT;
+        protected override int getMinimumAudience() => 30;
+
+        protected override int getPlayAmount() => 40000;
     }
 }
