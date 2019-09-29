@@ -6,6 +6,6 @@ namespace PerformanceBiller.Models
     {
         public string Customer { get; set; }
 
-        public IEnumerable<PerformanceModel> Perfomances { get; set; }
+        public IEnumerable<PerformanceModel> Performances { get; set; }
     }
 }

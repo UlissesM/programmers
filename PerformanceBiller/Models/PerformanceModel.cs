@@ -2,8 +2,7 @@
 {
     public class PerformanceModel
     {
-        public string PlayId { get; set; }
-
+        public string PlayID { get; set; }
         public PlayModel Play { get; set; }
 
         public int Audience { get; set; }
