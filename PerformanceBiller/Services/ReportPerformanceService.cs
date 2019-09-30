@@ -1,10 +1,5 @@
 ﻿using PerformanceBiller.Models;
-using PerformanceBiller.Models.Category;
 using PerformanceBiller.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace PerformanceBiller.Services

@@ -10,26 +10,18 @@ namespace PerformanceBiller
     public class Statement
     {
         private readonly IReportPerformanceService _reportPerformanceService;
+        const string FORMAT_USA = "en-Us";
 
         public Statement(IReportPerformanceService reportPerformanceService)
         {
             _reportPerformanceService = reportPerformanceService;
         }
 
-        public string PrintReport(InvoiceModel invoice, string cultureFormat)
+        public string PrintReport(InvoiceModel invoice, string cultureFormat=FORMAT_USA)
         {
             var rules = GetPerformancesCategoryRule(invoice);
 
             var reportModel = ReportModel.Create(invoice.Customer, rules, cultureFormat);
-
-            return _reportPerformanceService.CreateReport(reportModel);
-        }
-
-        public string PrintReport(InvoiceModel invoice)
-        {
-            var rules = GetPerformancesCategoryRule(invoice);
-
-            var reportModel = ReportModel.Create(invoice.Customer, rules);
 
             return _reportPerformanceService.CreateReport(reportModel);
         }

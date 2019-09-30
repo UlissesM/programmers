@@ -14,7 +14,7 @@ namespace PerformanceBiller.Models
         public int TotalCredits { get; private set; }
 
 
-        public static ReportModel Create(string customer, IEnumerable<CategoryRuleBase> rules, string cultureInfo = "en-Us") =>
+        public static ReportModel Create(string customer, IEnumerable<CategoryRuleBase> rules, string cultureInfo) =>
             new ReportModel
             {
                 Customer = customer,
