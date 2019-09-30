@@ -20,8 +20,6 @@ namespace PerformanceBiller.Services
 
         public string CreateReport(ReportModel reportModel)
         {
-            var valueTotalAmount = reportModel.Rules.Sum(rule => rule.Amount);
-            var valueTotalVolumeCredits = reportModel.Rules.Sum(rule => rule.VolumeCredit);
             _report.Append($"Statement for {reportModel.Customer}\n");
 
             foreach (var rule in reportModel.Rules)
@@ -29,8 +27,8 @@ namespace PerformanceBiller.Services
                 _report.Append($" {rule.Play.Name}: {(rule.Amount / 100).ToString("C", reportModel.CultureFormat)} ({rule.Audiance} seats)\n");
             }
 
-            _report.Append($"Amount owed is {(valueTotalAmount / 100).ToString("C", reportModel.CultureFormat)}\n");
-            _report.Append($"You earned {valueTotalVolumeCredits} credits\n");
+            _report.Append($"Amount owed is {(reportModel.TotalAmount / 100).ToString("C", reportModel.CultureFormat)}\n");
+            _report.Append($"You earned {reportModel.TotalCredits} credits\n");
 
             return _report.ToString();
         }

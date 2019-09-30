@@ -19,7 +19,7 @@ namespace PerformanceBiller.Tests
         }
 
         [Fact]
-        public void Statement_can_run()
+        public void Should_Print_Report()
         {
             var statement = new Statement(new ReportPerformanceService());
             var invoice = InvoiceModelMock.GetInvoiceModelMock();
