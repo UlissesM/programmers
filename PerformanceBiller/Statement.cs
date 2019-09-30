@@ -31,7 +31,7 @@ namespace PerformanceBiller
             return invoice.Performances.Select(perf =>
             {
                 return CategoryBuilder.Create(perf)
-                                            .GetCategory()
+                                            .Build()
                                              .CalculateAmount()
                                                .CalculateCredits();
             });

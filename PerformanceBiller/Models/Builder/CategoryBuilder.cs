@@ -19,7 +19,7 @@ namespace PerformanceBiller.Models.Builder
             };
         }
 
-        public CategoryRuleBase GetCategory()
+        public CategoryRuleBase Build()
         {
             switch (Play.Type)
             {

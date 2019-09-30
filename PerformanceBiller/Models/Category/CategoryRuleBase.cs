@@ -16,7 +16,7 @@ namespace PerformanceBiller.Models.Category
         public int VolumeCredit { get; set; }
         public PlayModel Play { get; set; }
         protected abstract bool ValidMaxTax();
-        protected abstract int MaxTax();
+        protected abstract int CalculateExtraCredit();
 
         public CategoryRuleBase CalculateCredits()
         {
@@ -28,7 +28,7 @@ namespace PerformanceBiller.Models.Category
         public CategoryRuleBase CalculateAmount()
         {
             if (ValidMaxTax())
-                Amount += MaxTax();
+                Amount += CalculateExtraCredit();
 
             Amount += SumTax();
             return this;

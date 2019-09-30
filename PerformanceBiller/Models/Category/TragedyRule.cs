@@ -11,7 +11,7 @@ namespace PerformanceBiller.Models.Category
             Amount = 40000;
         }
 
-        protected override int MaxTax()
+        protected override int CalculateExtraCredit()
         {
             return 1000 * (Audiance - valueMaxAudience);
         }
