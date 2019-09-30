@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PerformanceBiller.Models;
+using PerformanceBiller.Providers;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -21,19 +23,23 @@ namespace PerformanceBiller.Tests
 
             var statement = new Statement();
 
-            using (var invoicesFile = File.OpenText("..\\..\\..\\invoices.json"))
+            using (var invoicesFile = File.OpenText("/Users/samuelcouto/Projects/DotNet/programmers/PerformanceBiller.Tests/invoices.json"))
             using (var invoicesReader = new JsonTextReader(invoicesFile))
-            using (var playsFile = File.OpenText("..\\..\\..\\plays.json"))
+            using (var playsFile = File.OpenText("/Users/samuelcouto/Projects/DotNet/programmers/PerformanceBiller.Tests/plays.json"))
             using (var playsReader = new JsonTextReader(playsFile)) {
                 var invoices = (JArray) JToken.ReadFrom(invoicesReader);
-
                 var invoice = (JObject) invoices.First;
+                var invoiceModel = JsonConvert.DeserializeObject<InvoiceModel>(invoice.ToString());
+                var plays = (JObject) JToken.ReadFrom(playsReader);
+                var playModelDictionary = JsonConvert.DeserializeObject<Dictionary<string, PlayModel>>(plays.ToString());
 
-               var plays = (JObject) JToken.ReadFrom(playsReader);
-
-                var playsList = plays.Properties().ToList().Select(p=> p.Name);
-
-                //var actualResult = statement.Run(invoice, plays);
+                var builder = new InvoiceBuilder()
+                    .WithCustomer(invoiceModel.Customer);
+                invoiceModel.Performances.Select(p =>
+                 builder.WithPlay(playModelDictionary.GetValueOrDefault(p.PlayID).Type,
+                 playModelDictionary.GetValueOrDefault(p.PlayID).Name, p.Audience));
+                builder.Build();
+                var actualResult = statement.Run(invoice, plays);
 
                 //Assert.Equal(expectedOutput, actualResult);
             }
